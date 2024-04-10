@@ -5,9 +5,8 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div
-      className='bg-slate-300 text-blue-800 text-xl p-3 rounded-xl font-semibold'
-    >DISCORD_CLONE
+    <div>
+      Hello, here is a React app
     </div>
   )
 }
