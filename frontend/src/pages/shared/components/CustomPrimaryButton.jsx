@@ -1,25 +1,18 @@
-import React from 'react'
-import Button from '@mui/material/Button'
+import { twMerge } from 'tailwind-merge';
 
 const CustomPrimaryButton = ({
-    label, additionalStyles, disabled, onClick
+    label, className, disabled, onClick
 }) => {
-    return (<Button
-        variant='contained'
-        sx={{
-            bgcolor: '#5865F2',
-            color: 'white',
-            textTransform: 'none',
-            fontSize: '16px',
-            fontWeight: 500,
-            width: '100%',
-            height: '40px',
-        }}
-        style={additionalStyles ? additionalStyles : {}}
+    return (<button
+        // className='bg-[#5865F2] text-white text-lg font-semibold w-full h-10'
+        className={twMerge(
+            'bg-[#5865F2] text-white text-lg font-semibold w-full h-10',
+            className
+        )}
         disabled={disabled}
         onClick={onClick}
     >{label}
-    </Button>
+    </button>
     )
 }
 

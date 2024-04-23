@@ -56,5 +56,8 @@ export const getAuthActions = (dispatch) => {
         register: (userDetails, navigate) => {
             dispatch(authActionsRegister(userDetails, navigate))
         },
+        setUserDetails: (userDetails) => {
+            dispatch(setUserDetails(userDetails))
+        },
     }
 }
