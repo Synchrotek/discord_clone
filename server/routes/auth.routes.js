@@ -1,12 +1,12 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
 router.post('/register', (req, res) => {
-    express.send('Register route');
+    res.send('Register route');
 });
 
 router.post('/login', (req, res) => {
-    express.send('Login route');
+    res.send('Login route');
 });
 
-module.exports = router;
+export default router;

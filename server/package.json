@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Discord_clone backend",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "start": "nodemon server.js",
     "dev": "nodemon server.js"
