@@ -1,12 +1,9 @@
 import express from 'express';
+import { postLogin, postRegister } from '../controllers/auth.controllers.js';
+import { ExpressValidator } from 'express-validator'
 const router = express.Router();
 
-router.post('/register', (req, res) => {
-    res.send('Register route');
-});
-
-router.post('/login', (req, res) => {
-    res.send('Login route');
-});
+router.post('/register', postRegister);
+router.post('/login', postLogin);
 
 export default router;
