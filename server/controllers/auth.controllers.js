@@ -1,5 +1,6 @@
 import User from "../models/user.model.js";
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 // Handle user register controller =====================
 export const postRegister = async (req, res) => {
@@ -21,9 +22,16 @@ export const postRegister = async (req, res) => {
             email: email.toLowerCase(),
             password: hashedPassword,
         });
-        await newUser.save().then(result => {
+        await newUser.save().then(user => {
             // Create JWT token ---------------
-            const token = 'JWT TOKEN';
+            const token = jwt.sign(
+                {
+                    userId: user._id,
+                    email
+                },
+                process.env.TOKEN_KEY,
+                { expiresIn: "24h" }
+            );
             return res.status(201).json({
                 success: true,
                 message: 'User created successfully',
@@ -59,25 +67,30 @@ export const postLogin = async (req, res) => {
             .then(async (user) => {
                 // validate user given password---------
                 const passwordValidate = await bcrypt.compare(password, user.password);
-                if (passwordValidate) {
-                    // Create token --------------------
-                    const token = 'JWT_TOKEN';
-                    return res.status(200).json({
-                        success: true,
-                        message: "Login successful",
-                        userDetails: {
-                            email: user.email,
-                            username: user.username,
-                            token: token,
-                        }
-                    })
-                } else {
+                if (!passwordValidate) {
                     return res.status(500).json({
                         success: false,
-                        message: "Invalid credentials.Please try again",
-                        error: err.message,
+                        message: "Invalid credentials. Please try again",
                     })
                 }
+                // Create token --------------------
+                const token = jwt.sign(
+                    {
+                        userId: user._id,
+                        email
+                    },
+                    process.env.TOKEN_KEY,
+                    { expiresIn: "24h" }
+                );
+                return res.status(200).json({
+                    success: true,
+                    message: "Login successful",
+                    userDetails: {
+                        email: user.email,
+                        username: user.username,
+                        token: token,
+                    }
+                })
             }).catch((err) => {
                 return res.status(500).json({
                     success: false,
