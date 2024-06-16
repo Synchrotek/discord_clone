@@ -3,6 +3,7 @@ import http from 'http';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import { config } from 'dotenv';
+import * as socketServer from './socketServer.js';
 config();
 
 // routes import -------------------------
@@ -12,12 +13,15 @@ const PORT = process.env.PORT || 4500;
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: process.env.CLIENT_URL
+}));
 
 // registering routes --------------------
 app.use('/api/auth', authRoutes);
 
 const server = http.createServer(app);
+socketServer.registerSocketServer(server);
 
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
