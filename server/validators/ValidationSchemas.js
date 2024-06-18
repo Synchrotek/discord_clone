@@ -10,3 +10,7 @@ export const loginValidate = joi.object({
     password: joi.string().min(3).max(12).required(),
     email: joi.string().email().required(),
 });
+
+export const postFriendInvitationScheema = joi.object({
+    email: joi.string().email(),
+});

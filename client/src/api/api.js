@@ -40,7 +40,20 @@ export const postRegister = async (data) => {
     }
 };
 
-// secure routes ========================================================
+// secure routes ----------------------------------
+export const sendFriendsInvitation = async (data) => {
+    try {
+        return await apiclient.post('/friend-invitation/invite', data);
+    } catch (error) {
+        checkResponseCode(error);
+        return {
+            success: false,
+            error
+        };
+    }
+}
+
+// utils ========================================================
 const checkResponseCode = (error) => {
     const responseCode = error?.response?.status;
 

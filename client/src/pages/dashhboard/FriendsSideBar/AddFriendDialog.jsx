@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
 import { validateEmail } from '../../../utils/validator';
 import { toast } from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { getFriendsActions } from '../../../store/Actions/friendsActions';
 
 const AddFriendDialog = ({
     showDailog, setShowDailog,
     sendFriendInvitation = () => { },
 }) => {
+    const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [isFormValid, setIsFormValid] = useState('');
 
@@ -19,6 +22,7 @@ const AddFriendDialog = ({
         if (!isFormValid) {
             return toast.error('Eneter valid email id');
         }
+        getFriendsActions(dispatch).sendFriendsInvitation({ email });
         setShowDailog(false);
         setEmail("");
     };

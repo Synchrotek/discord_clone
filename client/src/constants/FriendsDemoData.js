@@ -1,12 +1,12 @@
 export const DUMMY_FRIENDS = [
     {
         id: 1,
-        username: 'Sam',
+        username: 'Satya1',
         isOnline: true,
     },
     {
         id: 2,
-        username: 'Jake',
+        username: 'Synchrotek',
         isOnline: false,
     },
 ];

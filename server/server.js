@@ -8,6 +8,7 @@ config();
 
 // routes import -------------------------
 import authRoutes from './routes/auth.routes.js'
+import friendInvitaionRotues from './routes/friendInvitaion.routes.js'
 
 const PORT = process.env.PORT || 4500;
 
@@ -19,6 +20,7 @@ app.use(cors({
 
 // registering routes --------------------
 app.use('/api/auth', authRoutes);
+app.use('/api/friend-invitation', friendInvitaionRotues);
 
 const server = http.createServer(app);
 socketServer.registerSocketServer(server);
